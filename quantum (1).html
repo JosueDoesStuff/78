@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>. </title>
+  <style>
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  padding-top: 233px; /* Adjust this value to move content down */
+}
+
+    .search-container {
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .search-engine-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .search-engine {
+      width: 50px;
+      height: 50px;
+      background: url('https://media4.giphy.com/media/aN9GqoR7OD3nq/200w.gif?cid=6c09b952wv4k8vusie142wm5s2c65te2o7ydbw11wyni4ewh&ep=v1_gifs_search&rid=200w.gif&ct=g') no-repeat center center;
+      background-size: cover;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      transition: border 0.3s ease;
+    }
+
+    .search-engine.google {
+      background: url('https://media.giphy.com/media/mf8UbIDew7e8g/200w.gif?cid=6c09b9524iens50rur8oppm1b7ub8qq174imkkvkg4bw5exy&ep=v1_gifs_search&rid=200w.gif&ct=g') no-repeat center center;
+      background-size: cover;
+    }
+
+    .search-engine.yahoo {
+      background: url('https://media0.giphy.com/media/1oLeAsuP5UfPK1KR85/giphy.gif?cid=ecf05e47rieopq2arn50ol553rqwo44qsnc4pl4kqmixoywc&ep=v1_gifs_related&rid=giphy.gif&ct=g') no-repeat center center;
+      background-size: cover;
+    }
+
+    .search-engine.discord {
+      background: url('https://upload.wikimedia.org/wikipedia/commons/3/34/Spinning_Mars.gif') no-repeat center center;
+      background-size: cover;
+    }
+
+    .search-engine:hover {
+      border: 3px solid #fff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+
+    .result {
+      grid-column: span 4;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #000;
+      text-align: right;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .clock {
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .timezone-selector {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 10px;
+      background: url('https://th.bing.com/th/id/OIP.fKd5u-LZ22Q78HfwW_6jywHaEo?rs=1&pid=ImgDetMain') no-repeat center center;
+      background-size: cover;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .timezone-selector option {
+      background-color: #555;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .timezone-selector:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    .timezone-selector:hover {
+      background-color: #555;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <div class="search-container">
+    <div class="search-engine-container">
+      <button onclick="openBing()" class="search-engine"></button>
+      <button onclick="openGoogle()" class="search-engine google"></button>
+      <button onclick="openDiscord()" class="search-engine discord"></button>
+      <button onclick="openYahoo()" class="search-engine yahoo"></button>
+    </div>
+    <div class="clock" id="clock"></div>
+    <select class="timezone-selector" id="timezoneSelector" onchange="changeTimezone()">
+      <option value="America/New_York">New York</option>
+      <option value="Europe/London">London</option>
+      <option value="Asia/Tokyo">Tokyo</option>
+      <option value="auto">Auto</option>
+      <option value="America/New_Jersey">New Jersey</option>
+      <!-- Add more options for different timezones -->
+    </select>
+  </div>
+
+  <script>
+    var selectedTimezone = "America/New_York";
+
+    function updateTime() {
+      var now = new Date();
+      var clockElement = document.getElementById('clock');
+      clockElement.textContent = now.toLocaleTimeString([], { timeZone: selectedTimezone, hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric' });
+    }
+
+    function changeTimezone() {
+      selectedTimezone = document.getElementById('timezoneSelector').value;
+      if (selectedTimezone === 'auto') {
+        selectedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      }
+      updateTime();
+    }
+
+    function openBing() {
+      window.open("https://www.bing.com", "", "width=1150, height=611,directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no");
+    }
+
+    function openGoogle() {
+      window.open("https://www.google.com", "", "width=1150, height=611,directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no");
+    }
+
+    function openDiscord() {
+      window.open("https://xn--zkr.xn--fiqp3jtxe9n0a37aj1cr63a7x9c.tm/lessons?pg=137#a53fq60tnb4eb8a", "", "width=1150, height=611,directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no");
+    }
+
+    function openYahoo() {
+      window.open("https://www.yahoo.com", "", "width=1150, height=611,directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no");
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("starfield");
+      const ctx = canvas.getContext("2d");
+      const numStars = 800;
+      const speed = 5;
+      let stars = [];
+
+      function setCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      class Star {
+        constructor(x, y, z, size) {
+          this.x = x;
+          this.y = y;
+          this.z = z;
+          this.size = size;
+        }
+
+        update() {
+          this.z -= speed;
+          if (this.z <= 0) {
+            this.reset();
+          }
+        }
+
+        reset() {
+          this.z = canvas.width;
+          this.x = Math.random() * (canvas.width * 2) - canvas.width;
+          this.y = Math.random() * (canvas.height * 2) - canvas.height;
+          this.size = Math.random() * 2 + 1;
+        }
+
+        draw() {
+          const x = ((this.x / this.z) * canvas.width) / 2 + canvas.width / 2;
+          const y = ((this.y / this.z) * canvas.height) / 2 + canvas.height / 2;
+          const radius = (1 - this.z / canvas.width) * this.size;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function initStars() {
+        stars = Array.from(
+          { length: numStars },
+          () =>
+            new Star(
+              Math.random() * (canvas.width * 2) - canvas.width,
+              Math.random() * (canvas.height * 2) - canvas.height,
+              Math.random() * canvas.width,
+              Math.random() * 2 + 1
+            )
+        );
+      }
+
+      function updateStars() {
+        stars.forEach((star) => star.update());
+      }
+
+      function drawStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        stars.forEach((star) => star.draw());
+      }
+
+      function animate() {
+        updateStars();
+        drawStars();
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener("resize", () => {
+        setCanvasSize();
+        initStars();
+      });
+
+      setCanvasSize();
+      initStars();
+      animate();
+    });
+  </script>
+</body>
+</html>
+
+  <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+    new Crate({
+        server: '1237036732482850887', // quantum sigma grind🤑
+        channel: '1237036733439279117' // #general
+    })
+  </script>
+</body>
+</html>
+
